@@ -1,3 +1,21 @@
 /* body {
     background-color: red;
 } */
+
+/*
+*   ----- DEBUG -----
+*/
+
+.debug .container {
+    border: 1px red dotted;
+}
+
+.debug .row {
+    border: 1px blue dotted;
+}
+
+.debug .col,
+.debug .col-md-8,
+.debug .col-md-4 {
+    border: 1px green dotted;
+}
