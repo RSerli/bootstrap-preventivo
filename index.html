@@ -46,14 +46,67 @@
     <main>
         <div class="container">
             <div class="row py-3">
+                <!-- Main Section with Form -->
                 <div class="col-md-8">
                     <section class="">
                         <!-- Quotation Request title and instruction -->
                         <h1>Richiesta Preventivo</h1>
                         <p>Compila il form per richiedere un preventivo per i nostri servizi di sviluppo.</p>
                         <!-- User Form -->
-                        <form>
-
+                        <form class="row g-3">
+                            <!-- Input User Name -->
+                            <div class="col-12">
+                                <label for="inputName" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="inputName">
+                            </div>
+                            <!-- Input User Surname -->
+                            <div class="col-12">
+                                <label for="inputSurame" class="form-label">Cognome</label>
+                                <input type="text" class="form-control" id="inputSurame">
+                            </div>
+                            <!-- Input User Mail -->
+                            <div class="col-12">
+                                <label for="inputEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="inputEmail">
+                            </div>
+                            <!-- Selection for the Quotation work -->
+                            <div class="col-12">
+                                <label for="SelectQuotationWork" class="form-label">Tipo di lavoro</label>
+                                <select id="SelectQuotationWork" class="form-select">
+                                    <option selected value="">--- Seleziona il tipo di lavoro ---</option>
+                                    <option value="BackEnd">Backend Development</option>
+                                    <option value="FrontEnd">Frontend Development</option>
+                                    <option value="Project">Project Analysis</option>
+                                </select>
+                            </div>
+                            <!-- User TextArea -->
+                            <div class="col-12">
+                                <label for="UserTextarea" class="form-label">Textarea con Bootstrap 5</label>
+                                <textarea class="form-control" id="UserTextarea"></textarea>
+                            </div>
+                            <!-- Input Promo Code -->
+                            <div class="col-12">
+                                <label for="inputPromo" class="form-label">Codice promozionale</label>
+                                <input type="text" class="form-control" id="inputPromo">
+                            </div>
+                            <!-- Privacy policy checkbox -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkPrivacy">
+                                <label class="form-check-label" for="checkPrivacy">
+                                    Accetto la Privacy Policy
+                                </label>
+                            </div>
+                            <!-- Submit Button -->
+                            <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+                                <button type="submit" class="btn btn-primary">Calcola Preventivo</button>
+                            </div>
+                            <!-- Output quotation price -->
+                            <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+                                <div class="text-center fs-3 fw-bolder">
+                                    <p>Prezzo Finale</p>
+                                    <p>&euro; --,--</p>
+                                </div>
+                            </div>
                         </form>
                     </section>
                 </div>
@@ -63,8 +116,8 @@
             </div>
         </div>
     </main>
+    <hr>
     <footer>
-        <hr>
         footer
     </footer>
     <!-- JS Bootstrap -->

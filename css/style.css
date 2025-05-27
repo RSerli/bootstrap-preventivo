@@ -3,6 +3,13 @@
 } */
 
 /*
+*   ----- SPECIFIED TAGS -----
+*/
+#UserTextarea {
+    height: 100px;
+}
+
+/*
 *   ----- DEBUG -----
 */
 
@@ -14,8 +21,9 @@
     border: 1px blue dotted;
 }
 
-.debug .col,
+.debug .col-12,
 .debug .col-md-8,
-.debug .col-md-4 {
+.debug .col-md-4,
+.debug .col-md-6 {
     border: 1px green dotted;
 }
