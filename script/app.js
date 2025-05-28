@@ -45,6 +45,13 @@ function isValidUserPromoCode(promoCode) {
     return false //IF the user promo code is NOT valid => FALSE
 }
 
+function isEmpty(inputValue) {
+    if (inputValue == "") {
+        return true
+    }
+    return false
+}
+
 /*
 *   --- Main Functions ---
 */
@@ -72,15 +79,17 @@ FormElement.addEventListener('submit', (event) => {
         alert("Attenzione! Accettare la privacy policy per proseguire")
         return
     }
-    // - Checking IF the user promo written is valid
-    if (isValidUserPromoCode(UserPromo)) {
-        DiscountPromoCode = 25
-    } else {
-        alert(`
+    // - Checking IF the user promo is written and is valid
+    if (!isEmpty(UserPromo)) {
+        if (isValidUserPromoCode(UserPromo)) {
+            DiscountPromoCode = 25
+        } else {
+            alert(`
             ATTENZIONE!
             Il codice inserito non è valido!
             Quindi, il prezzo finale verrà calcolato senza applicare sconti.
             `)
+        }
     }
     // Calculating the final price of the quatation
 
