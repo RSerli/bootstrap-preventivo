@@ -18,7 +18,7 @@ console.dir(checkboxPrivacyPolicy)
 */
 const PRICE_BACKEND = 20.50 // number float
 const PRICE_FRONTEND = 15.30 // number float
-const PRICE_BPROJECT = 33.60 // number float
+const PRICE_PROJECT = 33.60 // number float
 
 const ValidPromoCodes = [
     "YHDNU32",
@@ -28,7 +28,7 @@ const ValidPromoCodes = [
     "POCIE24"
 ]
 
-const defaultWorkingHours = 11 // number integer
+const DEFAULT_WORKINGHOURS = 11 // number integer
 /*
 *   --- Utility Functions ---
 */
@@ -79,8 +79,9 @@ FormElement.addEventListener('submit', (event) => {
         alert("Attenzione! Accettare la privacy policy per proseguire")
         return
     }
-    // - Checking IF the user promo is written and is valid
+    // - Checking IF the user promo is written
     if (!isEmpty(UserPromo)) {
+        // -- Checking IF the user promo is valid
         if (isValidUserPromoCode(UserPromo)) {
             DiscountPromoCode = 25
         } else {
@@ -91,6 +92,20 @@ FormElement.addEventListener('submit', (event) => {
             `)
         }
     }
-    // Calculating the final price of the quatation
-
+    // Calculating the price of the quatation
+    let QuotationPrice //numeber float
+    // checking type of work selected
+    if (SelectedWork == "BackEnd") { // IF the item selected is a backend work
+        QuotationPrice = DEFAULT_WORKINGHOURS * PRICE_BACKEND
+    } else if (SelectedWork == "FrontEnd") { // IF the item selected is a frontend work
+        QuotationPrice = DEFAULT_WORKINGHOURS * PRICE_FRONTEND
+    } else if (SelectedWork == "Project") { // IF the item selected is a project analysis work
+        QuotationPrice = DEFAULT_WORKINGHOURS * PRICE_PROJECT
+    }
+    console.log(SelectedWork, QuotationPrice)
+    // Calculating final price of the quatation with the possible discount
+    const DISCOUNT = (QuotationPrice * DiscountPromoCode) / 100
+    console.log("Sconto", DISCOUNT)
+    const finalQuotationPrice = QuotationPrice - DISCOUNT
+    console.log("Prezzo finale", finalQuotationPrice)
 })
