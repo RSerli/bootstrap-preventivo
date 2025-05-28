@@ -9,6 +9,11 @@
     height: 100px;
 }
 
+#inputPromo {
+    /* Only transform visualy the text in uppercase!! */
+    text-transform: uppercase;
+}
+
 /*
 *   ----- DEBUG -----
 */

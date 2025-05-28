@@ -9,6 +9,9 @@ const SelectionQuotationWork = FormElement.querySelector('#SelectQuotationWork')
 console.dir(SelectionQuotationWork)
 const textUserPromo = FormElement.querySelector('#inputPromo')
 console.dir(textUserPromo)
+const checkboxPrivacyPolicy = FormElement.querySelector('#checkPrivacy')
+console.dir(checkboxPrivacyPolicy)
+
 
 /*
 *   --- Utility Variables ---
@@ -25,13 +28,21 @@ const ValidPromoCodes = [
     "POCIE24"
 ]
 
-const DiscountPromoCode = 25 // number integer
-
-
 /*
 *   --- Utility Functions ---
 */
-
+function isValidUserPromoCode(promoCode) {
+    // transform the user promo code before get checked
+    const promoCodeUpperCase = promoCode.toUpperCase()
+    console.log(promoCodeUpperCase)
+    for (let i = 0; i < ValidPromoCodes.length; i++) {
+        const currentElement = ValidPromoCodes[i];
+        if (promoCodeUpperCase === currentElement) { //IF the user promo code is valid => TRUE
+            return true
+        }
+    }
+    return false //IF the user promo code is NOT valid => FALSE
+}
 
 /*
 *   --- Main Functions ---
@@ -46,4 +57,28 @@ FormElement.addEventListener('submit', (event) => {
     console.log(SelectedWork)
     const UserPromo = textUserPromo.value
     console.log(UserPromo)
+    const isPrivacyPolicyChecked = checkboxPrivacyPolicy.checked
+    console.log(isPrivacyPolicyChecked)
+    let DiscountPromoCode = 0
+    // Checking entered user values
+    // - Checking IF quotation worked is selected
+    if (SelectedWork === "") {
+        alert("Inserire il tipo di lavoro da preventivare!")
+        return
+    }
+    // - Checking IF privacy policy checkbox is toggled
+    if (!isPrivacyPolicyChecked) {
+        alert("Attenzione! Accettare la privacy policy per proseguire")
+        return
+    }
+    // - Checking IF the user promo written is valid
+    if (isValidUserPromoCode(UserPromo)) {
+        DiscountPromoCode = 25
+    } else {
+        alert(`
+            ATTENZIONE!
+            Il codice inserito non è valido!
+            Quindi, il prezzo finale verrà calcolato senza applicare sconti.
+            `)
+    }
 })
