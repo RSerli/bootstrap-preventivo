@@ -28,6 +28,7 @@ const ValidPromoCodes = [
     "POCIE24"
 ]
 
+const defaultWorkingHours = 11 // number integer
 /*
 *   --- Utility Functions ---
 */
@@ -59,7 +60,7 @@ FormElement.addEventListener('submit', (event) => {
     console.log(UserPromo)
     const isPrivacyPolicyChecked = checkboxPrivacyPolicy.checked
     console.log(isPrivacyPolicyChecked)
-    let DiscountPromoCode = 0
+    let DiscountPromoCode = 0 // number integer
     // Checking entered user values
     // - Checking IF quotation worked is selected
     if (SelectedWork === "") {
@@ -81,4 +82,6 @@ FormElement.addEventListener('submit', (event) => {
             Quindi, il prezzo finale verrà calcolato senza applicare sconti.
             `)
     }
+    // Calculating the final price of the quatation
+
 })
