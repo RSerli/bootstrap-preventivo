@@ -11,6 +11,8 @@ const textUserPromo = FormElement.querySelector('#inputPromo')
 console.dir(textUserPromo)
 const checkboxPrivacyPolicy = FormElement.querySelector('#checkPrivacy')
 console.dir(checkboxPrivacyPolicy)
+const rowFinalPrice = FormElement.querySelector('#outputFinalQuotationPrice')
+console.dir(rowFinalPrice)
 
 
 /*
@@ -108,4 +110,6 @@ FormElement.addEventListener('submit', (event) => {
     console.log("Sconto", DISCOUNT)
     const finalQuotationPrice = QuotationPrice - DISCOUNT
     console.log("Prezzo finale", finalQuotationPrice)
+    // display final quotation price
+    rowFinalPrice.innerHTML = `&euro; ${finalQuotationPrice.toFixed(2)}`
 })
