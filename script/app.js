@@ -3,15 +3,15 @@
 /*
 *   --- Getting elements from DOM ---
 */
-const FormElement = document.getElementById('QuotationForm')
-console.dir(FormElement)
-const SelectionQuotationWork = FormElement.querySelector('#SelectQuotationWork')
-console.dir(SelectionQuotationWork)
-const textUserPromo = FormElement.querySelector('#inputPromo')
+const formElement = document.getElementById('QuotationForm')
+console.dir(formElement)
+const selectionQuotationWork = formElement.querySelector('#SelectQuotationWork')
+console.dir(selectionQuotationWork)
+const textUserPromo = formElement.querySelector('#inputPromo')
 console.dir(textUserPromo)
-const checkboxPrivacyPolicy = FormElement.querySelector('#checkPrivacy')
+const checkboxPrivacyPolicy = formElement.querySelector('#checkPrivacy')
 console.dir(checkboxPrivacyPolicy)
-const rowFinalPrice = FormElement.querySelector('#outputFinalQuotationPrice')
+const rowFinalPrice = formElement.querySelector('#outputFinalQuotationPrice')
 console.dir(rowFinalPrice)
 
 
@@ -22,7 +22,7 @@ const PRICE_BACKEND = 20.50 // number float
 const PRICE_FRONTEND = 15.30 // number float
 const PRICE_PROJECT = 33.60 // number float
 
-const ValidPromoCodes = [
+const VALID_PROMO_CODES = [
     "YHDNU32",
     "JANJC63",
     "PWKCN25",
@@ -38,8 +38,8 @@ function isValidUserPromoCode(promoCode) {
     // transform the user promo code before get checked
     const promoCodeUpperCase = promoCode.toUpperCase()
     console.log(promoCodeUpperCase)
-    for (let i = 0; i < ValidPromoCodes.length; i++) {
-        const currentElement = ValidPromoCodes[i];
+    for (let i = 0; i < VALID_PROMO_CODES.length; i++) {
+        const currentElement = VALID_PROMO_CODES[i];
         if (promoCodeUpperCase === currentElement) { //IF the user promo code is valid => TRUE
             return true
         }
@@ -59,20 +59,20 @@ function isEmpty(inputValue) {
 */
 
 // Event Listener submit the form the user
-FormElement.addEventListener('submit', (event) => {
+formElement.addEventListener('submit', (event) => {
     event.preventDefault()
     console.log(event)
     // getting user data from the form
-    const SelectedWork = SelectionQuotationWork.value
-    console.log(SelectedWork)
-    const UserPromo = textUserPromo.value
-    console.log(UserPromo)
+    const selectedWork = selectionQuotationWork.value
+    console.log(selectedWork)
+    const insertedUserPromo = textUserPromo.value
+    console.log(insertedUserPromo)
     const isPrivacyPolicyChecked = checkboxPrivacyPolicy.checked
     console.log(isPrivacyPolicyChecked)
-    let DiscountPromoCode = 0 // number integer
+    let discountPromoCode = 0 // number integer
     // Checking entered user values
-    // - Checking IF quotation worked is selected
-    if (SelectedWork === "") {
+    // - Checking IF quotation work is selected
+    if (selectedWork === "") {
         alert("Inserire il tipo di lavoro da preventivare!")
         return
     }
@@ -82,10 +82,10 @@ FormElement.addEventListener('submit', (event) => {
         return
     }
     // - Checking IF the user promo is written
-    if (!isEmpty(UserPromo)) {
+    if (!isEmpty(insertedUserPromo)) {
         // -- Checking IF the user promo is valid
-        if (isValidUserPromoCode(UserPromo)) {
-            DiscountPromoCode = 25
+        if (isValidUserPromoCode(insertedUserPromo)) {
+            discountPromoCode = 25
         } else {
             alert(`
             ATTENZIONE!
@@ -95,20 +95,20 @@ FormElement.addEventListener('submit', (event) => {
         }
     }
     // Calculating the price of the quatation
-    let QuotationPrice //numeber float
+    let quotationPrice //numeber float
     // checking type of work selected
-    if (SelectedWork == "BackEnd") { // IF the item selected is a backend work
-        QuotationPrice = DEFAULT_WORKINGHOURS * PRICE_BACKEND
-    } else if (SelectedWork == "FrontEnd") { // IF the item selected is a frontend work
-        QuotationPrice = DEFAULT_WORKINGHOURS * PRICE_FRONTEND
-    } else if (SelectedWork == "Project") { // IF the item selected is a project analysis work
-        QuotationPrice = DEFAULT_WORKINGHOURS * PRICE_PROJECT
+    if (selectedWork == "BackEnd") { // IF the item selected is a backend work
+        quotationPrice = DEFAULT_WORKINGHOURS * PRICE_BACKEND
+    } else if (selectedWork == "FrontEnd") { // IF the item selected is a frontend work
+        quotationPrice = DEFAULT_WORKINGHOURS * PRICE_FRONTEND
+    } else if (selectedWork == "Project") { // IF the item selected is a project analysis work
+        quotationPrice = DEFAULT_WORKINGHOURS * PRICE_PROJECT
     }
-    console.log(SelectedWork, QuotationPrice)
+    console.log(selectedWork, quotationPrice)
     // Calculating final price of the quatation with the possible discount
-    const DISCOUNT = (QuotationPrice * DiscountPromoCode) / 100
-    console.log("Sconto", DISCOUNT)
-    const finalQuotationPrice = QuotationPrice - DISCOUNT
+    const actualDiscountValue = (quotationPrice * discountPromoCode) / 100
+    console.log("Sconto", actualDiscountValue)
+    const finalQuotationPrice = quotationPrice - actualDiscountValue
     console.log("Prezzo finale", finalQuotationPrice)
     // display final quotation price
     rowFinalPrice.innerHTML = `&euro; ${finalQuotationPrice.toFixed(2)}`
