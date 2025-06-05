@@ -11,8 +11,10 @@ const textUserPromo = formElement.querySelector('#inputPromo')
 console.dir(textUserPromo)
 const checkboxPrivacyPolicy = formElement.querySelector('#checkPrivacy')
 console.dir(checkboxPrivacyPolicy)
-const rowFinalPrice = formElement.querySelector('#outputFinalQuotationPrice')
-console.dir(rowFinalPrice)
+const rowIntegerPartFinalPrice = formElement.querySelector('#outputFinalQuotationPrice > #integerPart')
+console.dir(rowIntegerPartFinalPrice)
+const rowDecimalPartFinalPrice = formElement.querySelector('#outputFinalQuotationPrice > #decimalPart')
+console.dir(rowDecimalPartFinalPrice)
 
 
 /*
@@ -52,6 +54,28 @@ function isEmpty(inputValue) {
         return true
     }
     return false
+}
+
+function gettingPriceData(PriceValue, option) {
+    // Set the option to display the currency
+    const PriceOption = {
+        style: "currency",
+        currency: "EUR"
+    }
+    // Create the array object with the last set options
+    const priceArrayFormatted = new Intl.NumberFormat("it-IT", PriceOption).formatToParts(PriceValue)
+    // console.log(priceArrayFormatted)
+    // getting the info that we need
+    let dataNeeded
+    for (let i = 0; i < priceArrayFormatted.length; i++) {
+        const currentElement = priceArrayFormatted[i];
+        // console.log(currentElement)
+        if (currentElement.type === option) { // getting the integer of the price
+            dataNeeded = currentElement.value
+        }
+    }
+    // console.log(dataNeeded)
+    return dataNeeded
 }
 
 /*
@@ -111,5 +135,9 @@ formElement.addEventListener('submit', (event) => {
     const finalQuotationPrice = quotationPrice - actualDiscountValue
     console.log("Prezzo finale", finalQuotationPrice)
     // display final quotation price
-    rowFinalPrice.innerHTML = `&euro; ${finalQuotationPrice.toFixed(2)}`
+    const finalPriceInteger = gettingPriceData(finalQuotationPrice, "integer") // getting the integer of the price
+    const finalPriceDecimal = gettingPriceData(finalQuotationPrice, "fraction") // getting the decimals of the price
+    console.log(finalPriceInteger, finalPriceDecimal)
+    rowIntegerPartFinalPrice.innerHTML = `&euro; ` + finalPriceInteger
+    rowDecimalPartFinalPrice.innerHTML = "," + finalPriceDecimal
 })
