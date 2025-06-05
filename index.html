@@ -45,9 +45,9 @@
     </header>
     <main>
         <div class="container">
-            <div class="row py-3">
+            <div class="row py-4">
                 <!-- Main Section with Form -->
-                <div class="col-md-8">
+                <div class="mb-4 col-md-8 mb-md-0">
                     <section class="">
                         <!-- Quotation Request title and instruction -->
                         <h1>Richiesta Preventivo</h1>
@@ -103,9 +103,14 @@
                             </div>
                             <!-- Output quotation price -->
                             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
-                                <div class="text-center fs-3 fw-bolder">
+                                <div class="text-center fs-3 fw-bold">
                                     <p>Prezzo Finale</p>
-                                    <p id="outputFinalQuotationPrice">&euro; --,--</p>
+                                    <!-- <p id="outputFinalQuotationPrice">&euro; --,--</p> -->
+                                    <div class="d-flex justify-content-center align-items-baseline"
+                                        id="outputFinalQuotationPrice">
+                                        <span id="integerPart">&euro; 00</span>
+                                        <span class="fs-4 text-secondary" id="decimalPart">,00</span>
+                                    </div>
                                 </div>
                             </div>
                         </form>
