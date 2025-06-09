@@ -40,20 +40,22 @@ function isValidUserPromoCode(promoCode) {
     // transform the user promo code before get checked
     const promoCodeUpperCase = promoCode.toUpperCase()
     console.log(promoCodeUpperCase)
-    for (let i = 0; i < VALID_PROMO_CODES.length; i++) {
-        const currentElement = VALID_PROMO_CODES[i];
-        if (promoCodeUpperCase === currentElement) { //IF the user promo code is valid => TRUE
-            return true
-        }
-    }
-    return false //IF the user promo code is NOT valid => FALSE
+    return VALID_PROMO_CODES.includes(promoCodeUpperCase)
+    // for (let i = 0; i < VALID_PROMO_CODES.length; i++) {
+    //     const currentElement = VALID_PROMO_CODES[i];
+    //     if (promoCodeUpperCase === currentElement) { //IF the user promo code is valid => TRUE
+    //         return true
+    //     }
+    // }
+    // return false //IF the user promo code is NOT valid => FALSE
 }
 
 function isEmpty(inputValue) {
-    if (inputValue == "") {
-        return true
-    }
-    return false
+    return inputValue.length == 0
+    // if (inputValue == "") {
+    //     return true
+    // }
+    // return false
 }
 
 function gettingPriceData(PriceValue, option) {
@@ -64,7 +66,7 @@ function gettingPriceData(PriceValue, option) {
     }
     // Create the array object with the last set options
     const priceArrayFormatted = new Intl.NumberFormat("it-IT", PriceOption).formatToParts(PriceValue)
-    // console.log(priceArrayFormatted)
+    console.log(priceArrayFormatted)
     // getting the info that we need
     let dataNeeded
     for (let i = 0; i < priceArrayFormatted.length; i++) {
